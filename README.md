@@ -18,7 +18,7 @@ docker build -t depth-anything-3 .
 Run the backend (with GPU):
 
 ```bash
-docker run --gpus all depth-anything-3
+docker run --gpus all --name depth-anything-3-container -v $(pwd)/assets/examples:/workspace/assets/examples depth-anything-3
 ```
 
 ---
@@ -27,15 +27,15 @@ docker run --gpus all depth-anything-3
 
 To run inference using the CLI inside the container:
 
+
 ```bash
-docker run --gpus all -v $(pwd)/assets/examples:/workspace/assets/examples depth-anything-3 \
-  da3 auto /workspace/assets/examples/images \
-    --export-format glb \
-    --export-dir /workspace/assets/examples/results \
-    --use-backend
+docker exec -it depth-anything-3-container da3 auto /workspace/assets/examples/input_images \
+  --export-format glb \
+  --export-dir /workspace/assets/examples/results \
+  --use-backend
 ```
 
-This will process images in `/workspace/assets/examples/images` and export results to `/workspace/assets/examples/results` in the GLB format.
+This will process images in `/workspace/assets/examples/input_images` and export results to `/workspace/assets/examples/results` in the GLB format.
 
 ---
 
