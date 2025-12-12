@@ -1,3 +1,44 @@
+
+---
+
+
+> **⚠️ This repository is a fork of [Depth-Anything-3](https://github.com/ByteDance-Seed/Depth-Anything-3).**  
+> It was created for internal use at our company. The only change is the addition of a Dockerfile for easy deployment.
+
+---
+
+## Docker Usage
+
+Build the image:
+
+```bash
+docker build -t depth-anything-3 .
+```
+
+Run the backend (with GPU):
+
+```bash
+docker run --gpus all depth-anything-3
+```
+
+---
+
+## Example: Run Inference from Container
+
+To run inference using the CLI inside the container:
+
+```bash
+docker run --gpus all -v $(pwd)/assets/examples:/workspace/assets/examples depth-anything-3 \
+  da3 auto /workspace/assets/examples/images \
+    --export-format glb \
+    --export-dir /workspace/assets/examples/results \
+    --use-backend
+```
+
+This will process images in `/workspace/assets/examples/images` and export results to `/workspace/assets/examples/results` in the GLB format.
+
+---
+
 <div align="center">
 <h1 style="border-bottom: none; margin-bottom: 0px ">Depth Anything 3: Recovering the Visual Space from Any Views</h1>
 <!-- <h2 style="border-top: none; margin-top: 3px;">Recovering the Visual Space from Any Views</h2> -->
